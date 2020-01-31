@@ -1,4 +1,4 @@
-FROM php:7.1-fpm-alpine
+FROM php:7.3-fpm-alpine
 
 # Install dev dependencies
 RUN apk update \
@@ -64,6 +64,8 @@ RUN pecl channel-update pecl.php.net \
     && rm -rf /tmp/pear \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
     && echo "extension=event.so" > /usr/local/etc/php/conf.d/event.ini
+
+RUN wget https://get.symfony.com/cli/installer -O - | bash && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
 WORKDIR /var/www/html
 
